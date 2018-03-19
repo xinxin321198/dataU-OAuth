@@ -29,14 +29,15 @@ public class DoubanOAuthController {
 
     @RequestMapping("index")
     public String index(String code, HttpServletRequest request) throws IOException {
-
+    	
+    	
         RestTemplate restTemplate = new RestTemplateBuilder().build();
 
         /**
          * （D）客户端收到授权码，附上早先的"重定向URI"，向认证服务器申请令牌。这一步是在客户端的后台的服务器上完成的，对用户不可见。
          */
         String accessToken = restTemplate.getForObject("http://localhost:8080/getTokenByCode?" +
-            "code=shou_quan_ma&" +
+            "code="+code+"&" +
             "redirect_uri=http://localhost:8081/getTokenByCode&" +
             "client_id=hyd", String.class);
 
